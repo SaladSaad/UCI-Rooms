@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 from bs4 import BeautifulSoup as bs4
 
-""" 
+"""
 body = "Submit=Display+Web+Results&YearTerm=2022-92&Breadth=ANY&Dept=EECS&CourseNum=&Division=ANY&CourseCodes=&InstrName=&CourseTitle=&ClassType=ALL&Units=&Days=&StartTime=&EndTime=&MaxCap=&FullCourses=ANY&FontSize=100&CancelledCourses=Exclude&Bldg=&Room="
 
 url = "https://www.reg.uci.edu/perl/WebSoc"
@@ -22,21 +22,36 @@ path = 'webp.html'
 soup = bs4(open(path), 'html.parser')
 with open("webp1.html", 'w') as file:
     file.write(str(soup))
-header = soup.find_all("table")[1].find("tr")
-print(header)
 
 data = []
 # for getting the data
-HTML_data = soup.find_all("table")[0].find_all("tr")[1:]
+HTML_data = soup.find_all("tr")
 
+rows = [0, 5, 6]
 for element in HTML_data:
+    i = 0
     sub_data = []
-    for sub_element in element:
-        try:
-            sub_data.append(sub_element.get_text())
-        except:
-            continue
-    data.append(sub_data)
+    start = (element.get_text()[0:5])
+    if(start.isdigit()):
+        for sub_element in element:
+            if(i in rows):
+                sub_data.append(sub_element.get_text())
+            i = i+1
 
-print(data)
-print('wubwub')
+        if(sub_data[2] != 'TBA'):
+            data.append(sub_data)
+
+for classes in data:
+    print(classes)
+
+
+""" 
+            if(sub_data[0].isdigit()):
+                print('Class found: ', int(sub_data[0]))
+                break
+            else:
+                break 
+            
+            
+            if (element[0].isdigit()):
+        print('Class found:', int(element[0]))"""
