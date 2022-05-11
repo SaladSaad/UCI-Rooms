@@ -21,10 +21,8 @@ def times(ogString):
 
 
 def main():
-    path = 'webp.html'
+    path = 'html/all_depts.html'
     soup = bs4(open(path), 'html.parser')
-    with open("webp1.html", 'w') as file:
-        file.write(str(soup))
 
     data = []
     # for getting the data
@@ -50,8 +48,7 @@ def main():
             if(sub_data[3] != 'TBA'):
                 data.append(sub_data)
 
-    for classes in data:
-        print(classes)
+    #for classes in data: print(classes)
 
 
 if __name__ == "__main__":
