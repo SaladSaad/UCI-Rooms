@@ -1,8 +1,8 @@
 import requests
-import pandas as pd
 from bs4 import BeautifulSoup as bs4
 import unicodedata
 import re
+import csv
 
 
 def class_code(class_string):
@@ -28,6 +28,7 @@ def main():
     # for getting the data
     HTML_data = soup.find_all("tr")
 
+    invalid = ['TBA', 'TBATBA']
     for element in HTML_data:
         i = 0
         sub_data = []
@@ -45,10 +46,16 @@ def main():
                     sub_data.append(sub_elem_data)
                 i += 1
 
-            if(sub_data[3] != 'TBA'):
+            if((sub_data[3] not in invalid) and (sub_data[2] not in invalid)):
                 data.append(sub_data)
 
-    #for classes in data: print(classes)
+    header = ['Code', 'Days', 'Times', 'Location']
+    f = open('parsed-courses.csv', 'w', encoding='UTF-8', )
+    writer = csv.writer(f)
+    writer.writerow(header)
+    for course in data:
+        writer.writerow(course)
+    f.close()
 
 
 if __name__ == "__main__":
