@@ -1,8 +1,8 @@
 import requests
 from bs4 import BeautifulSoup as bs4
-import unicodedata
 import re
 import csv
+import pandas as pd
 
 
 def class_code(class_string):
@@ -25,6 +25,7 @@ def main():
     soup = bs4(open(path), 'html.parser')
 
     data = []
+    # data.append(header)
     # for getting the data
     HTML_data = soup.find_all("tr")
 
@@ -50,12 +51,10 @@ def main():
                 data.append(sub_data)
 
     header = ['Code', 'Days', 'Times', 'Location']
-    f = open('parsed-courses.csv', 'w', encoding='UTF-8', )
-    writer = csv.writer(f)
-    writer.writerow(header)
-    for course in data:
-        writer.writerow(course)
-    f.close()
+    df = pd.DataFrame(data, columns=header)
+    df.sort_values(["Location", "Days"], axis=0,
+                   ascending=[True, False], inplace=True)
+    df.to_csv("parsed-courses.csv", index=False)
 
 
 if __name__ == "__main__":
