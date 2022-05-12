@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup as bs4
 import re
 import csv
 import pandas as pd
+from datetime import datetime, time
 
 
 def class_code(class_string):
@@ -13,15 +14,52 @@ def class_code(class_string):
 
 
 # get rid of funky characters, spaces, and then split into days and times
-def times(ogString):
+def days_times(ogString):
+
+    if('TBA' in ogString):
+        return ('TBA', ['TBA', 'TBA'])
     ogString = ogString.replace(u'\xa0', u'')
-    ogString = re.sub(" +", " ", ogString)
+    ogString = re.sub(" +", " ", ogString)  # getting rid of multiple spaces
     # unicodedata.normalize("NFKD", ogString)
-    return(ogString.split(' ', 1))
+    days, times = ogString.split(' ', 1)
+
+    times = times.replace(' ', '')
+    times = re.sub(r'p', 'PM', times)
+    times = re.sub(r' ', '0', times)
+    start, end = times.split('-', 1)
+
+    start_hour = start.split(':', 1)[0]
+
+    if ('PM' not in end):  # start AM, end AM
+        end += 'AM'
+    end = datetime.strptime(end, '%I:%M%p')
+
+    # Figure out whether start time is AM or PM
+    temp_start_am = start_hour+'AM'
+    temp_start_am = datetime.strptime(temp_start_am, '%I%p')
+
+    temp_start_pm = start_hour+'PM'
+    temp_start_pm = datetime.strptime(temp_start_pm, '%I%p')
+
+    temp_am_diff = end - temp_start_am
+    temp_pm_diff = end - temp_start_pm
+
+    if(temp_am_diff > temp_pm_diff and temp_pm_diff.days > -1):
+        start += 'PM'
+    else:
+        start += 'AM'
+    start = datetime.strptime(start, '%I:%M%p')
+    start = start.time().strftime('%H:%M')
+    end = end.time().strftime('%H:%M')
+
+    times = [start, end]
+
+    print('returning: ', days, times)
+    return(days, times)
 
 
 def main():
-    path = 'html/all_depts.html'
+    path = 'html/eecs.html'
     soup = bs4(open(path), 'html.parser')
 
     data = []
@@ -29,7 +67,7 @@ def main():
     # for getting the data
     HTML_data = soup.find_all("tr")
 
-    invalid = ['TBA', 'TBATBA']
+    invalid = ['TBA', 'TBATBA', 'ON LINE']
     for element in HTML_data:
         i = 0
         sub_data = []
@@ -40,7 +78,8 @@ def main():
                 if i == 0:  # course code
                     sub_data.append(class_code(sub_elem_data))
                 elif i == 5:  # day times
-                    day_time = times(sub_elem_data)
+                    print(sub_elem_data)
+                    day_time = days_times(sub_elem_data)
                     sub_data.append(day_time[0])
                     sub_data.append(day_time[1])
                 elif i == 6:  # location
@@ -58,4 +97,5 @@ def main():
 
 
 if __name__ == "__main__":
+    #days_times('TuTh    9:30-10:50')
     main()
