@@ -4,7 +4,6 @@ import re
 import csv
 import pandas as pd
 from datetime import datetime, time
-import plotly.express as px
 
 
 def class_code(class_string):
@@ -50,17 +49,11 @@ def days_times(ogString):
     else:
         start += 'AM'
     start = datetime.strptime(start, '%I:%M%p')
-    start = start.time().strftime('%H:%M')
-    end = end.time().strftime('%H:%M')
+    start = start.time().strftime('%H%M')
+    end = end.time().strftime('%H%M')
 
     #print('returning: ', days, times)
     return(days, start, end)
-
-
-def plotter(df):
-    fig = px.timeline(df, x_start="Start_Time",
-                      x_end="End_Time", y="Location", color="Location")
-    fig.show()
 
 
 def main():
@@ -105,10 +98,9 @@ def main():
 
     header = ['Code', 'Days', 'Start_Time', 'End_Time', 'Location']
     df = pd.DataFrame(data, columns=header)
-    df.sort_values(["Start_Time", "Location"], axis=0,
-                   ascending=[True, False], inplace=True)
+    df.sort_values(["Location", "Start_Time"], axis=0,
+                   ascending=[True, True], inplace=True)
     df.to_csv("parsed-courses.csv", index=False)
-    plotter(df)
 
 
 if __name__ == "__main__":
