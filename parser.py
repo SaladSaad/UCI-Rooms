@@ -4,6 +4,7 @@ import re
 import csv
 import pandas as pd
 from datetime import datetime, time
+import plotly.express as px
 
 
 def class_code(class_string):
@@ -17,7 +18,7 @@ def class_code(class_string):
 def days_times(ogString):
 
     if('TBA' in ogString):
-        return ('TBA', ['TBA', 'TBA'])
+        return ('TBA', 'TBA', 'TBA')
     ogString = ogString.replace(u'\xa0', u'')
     ogString = re.sub(" +", " ", ogString)  # getting rid of multiple spaces
     # unicodedata.normalize("NFKD", ogString)
@@ -52,14 +53,18 @@ def days_times(ogString):
     start = start.time().strftime('%H:%M')
     end = end.time().strftime('%H:%M')
 
-    times = [start, end]
-
     #print('returning: ', days, times)
-    return(days, times)
+    return(days, start, end)
+
+
+def plotter(df):
+    fig = px.timeline(df, x_start="Start_Time",
+                      x_end="End_Time", y="Location", color="Location")
+    fig.show()
 
 
 def main():
-    path = 'html/all_depts.html'
+    path = 'html/eecs.html'
     soup = bs4(open(path), 'html.parser')
 
     data = []
@@ -82,23 +87,28 @@ def main():
                     # THIS CHECK IS A TEMP FIX.
                     if(len(sub_elem_data) < 20):
                         day_time = days_times(sub_elem_data)
-                        sub_data.append(day_time[0])
-                        sub_data.append(day_time[1])
+                        print(day_time)
+                        sub_data.append(day_time[0])  # days
+                        sub_data.append(day_time[1])  # start time
+                        sub_data.append(day_time[2])  # end time
                     else:
                         sub_data.append('TBA')
-                        sub_data.append(['TBA', 'TBA'])
+                        sub_data.append('TBA')
+                        sub_data.append('TBA')
                 elif i == 6:  # location
                     sub_data.append(sub_elem_data)
                 i += 1
 
-            if((sub_data[3] not in invalid) and (sub_data[1] not in invalid)):
+            # check day and location
+            if((sub_data[1] not in invalid) and (sub_data[4] not in invalid)):
                 data.append(sub_data)
 
-    header = ['Code', 'Days', 'Times', 'Location']
+    header = ['Code', 'Days', 'Start_Time', 'End_Time', 'Location']
     df = pd.DataFrame(data, columns=header)
-    df.sort_values(["Location", "Days"], axis=0,
+    df.sort_values(["Start_Time", "Location"], axis=0,
                    ascending=[True, False], inplace=True)
     df.to_csv("parsed-courses.csv", index=False)
+    plotter(df)
 
 
 if __name__ == "__main__":
