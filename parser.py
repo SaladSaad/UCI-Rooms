@@ -54,12 +54,12 @@ def days_times(ogString):
 
     times = [start, end]
 
-    print('returning: ', days, times)
+    #print('returning: ', days, times)
     return(days, times)
 
 
 def main():
-    path = 'html/eecs.html'
+    path = 'html/all_depts.html'
     soup = bs4(open(path), 'html.parser')
 
     data = []
@@ -78,15 +78,20 @@ def main():
                 if i == 0:  # course code
                     sub_data.append(class_code(sub_elem_data))
                 elif i == 5:  # day times
-                    print(sub_elem_data)
-                    day_time = days_times(sub_elem_data)
-                    sub_data.append(day_time[0])
-                    sub_data.append(day_time[1])
+                    # TODO: FIGURE OUT HOW TO DEAL WITH DOUBLES
+                    # THIS CHECK IS A TEMP FIX.
+                    if(len(sub_elem_data) < 20):
+                        day_time = days_times(sub_elem_data)
+                        sub_data.append(day_time[0])
+                        sub_data.append(day_time[1])
+                    else:
+                        sub_data.append('TBA')
+                        sub_data.append(['TBA', 'TBA'])
                 elif i == 6:  # location
                     sub_data.append(sub_elem_data)
                 i += 1
 
-            if((sub_data[3] not in invalid) and (sub_data[2] not in invalid)):
+            if((sub_data[3] not in invalid) and (sub_data[1] not in invalid)):
                 data.append(sub_data)
 
     header = ['Code', 'Days', 'Times', 'Location']
