@@ -10,7 +10,7 @@ def depts():
     with open("home.html", 'w') as file:
         file.write(response.text)
 
-    path = 'home.html'
+    path = 'static/home.html'
     soup = bs4(open(path), 'html.parser')
 
     items = soup.select('[name=Dept] option[value]')
@@ -28,14 +28,14 @@ def depts():
 def main():
     dept_names = depts()
 
-    f = open('html/all_depts.html', 'w')  # clear file init
+    f = open('static/all_depts.html', 'w')  # clear file init
     f.close()
 
     url = "https://www.reg.uci.edu/perl/WebSoc"
     for name in dept_names:
         body = f"""Submit=Display+Web+Results&YearTerm=2022-92&Breadth=ANY&Dept={name}&CourseNum=&Division=ANY&CourseCodes=&InstrName=&CourseTitle=&ClassType=ALL&Units=&Days=&StartTime=&EndTime=&MaxCap=&FullCourses=ANY&FontSize=100&CancelledCourses=Exclude&Bldg=&Room="""
         response = requests.post(url, body, stream=True)
-        with open("html/all_depts.html", 'a') as file:
+        with open("static/all_depts.html", 'a') as file:
             file.write(response.text)
 
 

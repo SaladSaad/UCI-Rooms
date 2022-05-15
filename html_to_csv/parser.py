@@ -57,7 +57,7 @@ def days_times(ogString):
 
 
 def main():
-    path = 'html/eecs.html'
+    path = 'static/eecs.html'
     soup = bs4(open(path), 'html.parser')
 
     data = []
@@ -100,7 +100,7 @@ def main():
     df = pd.DataFrame(data, columns=header)
     df.sort_values(["Location", "Start_Time"], axis=0,
                    ascending=[True, True], inplace=True)
-    df.to_csv("parsed-courses.csv", index=False)
+    df.to_csv("static/parsed-courses.csv", index=False)
 
 
 if __name__ == "__main__":

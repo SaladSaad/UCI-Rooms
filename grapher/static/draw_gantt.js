@@ -7,7 +7,7 @@ function readCSV() {
     const text = e.target.result;
     console.log(text);
   };
-  reader.readAsText("./parsed-courses.csv");
+  reader.readAsText("html_to_csv/parsed-courses.csv");
 }
 function drawChart() {
   var container = document.getElementById("example5.3");
