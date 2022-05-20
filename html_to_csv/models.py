@@ -5,8 +5,11 @@ from django.db import models
 
 # Create your models here.
 class Course(models.Model):
-    code = models.IntegerField(max_length=6)
+    code = models.IntegerField()
     days = models.CharField(max_length=20)
-    starttime = models.IntegerField(max_length=4)
-    endtime = models.IntegerField(max_length=4)
+    starttime = models.IntegerField()
+    endtime = models.IntegerField()
     location = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.location
