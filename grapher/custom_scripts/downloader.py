@@ -6,11 +6,11 @@ from bs4 import BeautifulSoup as bs4
 # to individually parse later
 def depts():
     url = "https://www.reg.uci.edu/perl/WebSoc"
+    path = './static/home.html'
     response = requests.post(url, stream=True)
-    with open("home.html", 'w') as file:
+    with open(path, 'w') as file:
         file.write(response.text)
 
-    path = 'static/home.html'
     soup = bs4(open(path), 'html.parser')
 
     items = soup.select('[name=Dept] option[value]')
@@ -28,7 +28,7 @@ def depts():
 def main():
     dept_names = depts()
 
-    f = open('static/all_depts.html', 'w')  # clear file init
+    f = open('./static/all_depts.html', 'w')  # clear file init
     f.close()
 
     url = "https://www.reg.uci.edu/perl/WebSoc"

@@ -38,9 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'grapher',
-    'html_to_csv'
+
+    #mine
+   'grapher',
     #parser
+    
 ]
 
 MIDDLEWARE = [
