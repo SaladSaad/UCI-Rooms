@@ -5,7 +5,8 @@ from .models import Course
 
 # Create your views here.
 def show_graph(request):
-    return render(request, 'index.html')
+    context = {"nani":'bruh', "mylist":['nothing at all','wubba lubba dub dub',120345]}
+    return render(request, 'index.html', context)
 
 # Create your views here.
 
