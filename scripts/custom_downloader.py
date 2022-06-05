@@ -1,12 +1,16 @@
+### This script downloads all department htmls and appends them to one big html file for parser.py
+## Make sure to check all paths before running this script
+
 import requests
 from bs4 import BeautifulSoup as bs4
+
 
 
 # gets home page of class schedule to get all dept names
 # to individually parse later
 def depts():
     url = "https://www.reg.uci.edu/perl/WebSoc"
-    path = './static/home.html'
+    path = 'data/home.html'
     response = requests.post(url, stream=True)
     with open(path, 'w') as file:
         file.write(response.text)
@@ -25,10 +29,10 @@ def depts():
 # gets list of department names, parses each page and saves to file.
 
 
-def main():
+def main_Downloader():
     dept_names = depts()
 
-    f = open('./static/all_depts.html', 'w')  # clear file init
+    f = open('data/all_depts.html', 'w')  # clear file init
     f.close()
 
     url = "https://www.reg.uci.edu/perl/WebSoc"
@@ -39,5 +43,5 @@ def main():
             file.write(response.text)
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == '__main_Downloader__':
+    main_Downloader()

@@ -1,9 +1,10 @@
-import requests
+### This script takes a given html file and filters out all courses and stores their info in a csv file.
+## Make sure to check all paths before running this script
+
 from bs4 import BeautifulSoup as bs4
-import re
-import csv
+import re, os
 import pandas as pd
-from datetime import datetime, time
+from datetime import datetime
 
 
 def class_code(class_string):
@@ -52,12 +53,19 @@ def days_times(ogString):
     start = start.time().strftime('%H%M')
     end = end.time().strftime('%H%M')
 
-    #print('returning: ', days, times)
+
+    #getting rid of leading zeroes
+    if(str(start)[0]=='0'):
+        start=int(str(start)[1:])
+    if(str(end)[0]=='0'):
+        end=int(str(end)[1:])
+
     return(days, start, end)
 
 
-def main():
-    path = './static/eecs.html'
+def main_Parser():
+    print(os.getcwd())
+    path = 'data/eecs.html'
     soup = bs4(open(path), 'html.parser')
 
     data = []
@@ -80,7 +88,6 @@ def main():
                     # THIS CHECK IS A TEMP FIX.
                     if(len(sub_elem_data) < 20):
                         day_time = days_times(sub_elem_data)
-                        print(day_time)
                         sub_data.append(day_time[0])  # days
                         sub_data.append(day_time[1])  # start time
                         sub_data.append(day_time[2])  # end time
@@ -100,9 +107,9 @@ def main():
     df = pd.DataFrame(data, columns=header)
     df.sort_values(["Location", "Start_Time"], axis=0,
                    ascending=[True, True], inplace=True)
-    df.to_csv("./static/parsed-courses.csv", index=False)
+    df.to_csv("data/parsed-courses.csv", index=False)
 
 
-if __name__ == "__main__":
+if __name__ == "__main_Parser__":
     #days_times('TuTh    9:30-10:50')
-    main()
+    main_Parser()

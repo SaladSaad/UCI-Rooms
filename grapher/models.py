@@ -12,4 +12,4 @@ class Course(models.Model):
     location = models.CharField(max_length=15)
 
     def __str__(self):
-        return self.code, self.location
+        return self.location
