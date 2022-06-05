@@ -1,6 +1,9 @@
 google.charts.load("current", { packages: ["timeline"] });
 google.charts.setOnLoadCallback(drawChart);
 
+function test(courses) {
+  console.log(courses);
+}
 function drawChart() {
   var container = document.getElementById("example5.3");
   var chart = new google.visualization.Timeline(container);

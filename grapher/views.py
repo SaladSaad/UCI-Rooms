@@ -1,26 +1,24 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.core import serializers
 
 from .models import Course
 
 # Create your views here.
 def show_graph_view(request):
-    context = {"nani":'bruh', "mylist":['nothing at all','wubba lubba dub dub',120345]}
+    json_serializer = serializers.get_serializer("json")()
+    courses_json = json_serializer.serialize(Course.objects.all())
+    
+    context = {'data': courses_json}
     return render(request, 'index.html', context)
 
 # Create your views here.
 
 def course_detail_view(request):
-    obj = Course.objects.get(id=4)
-    Course.objects.create(code=12000, days = 'MWF', starttime=200, endtime=400, location='MDE AUD')
-    '''
+    
+    obj=Course.objects.get(code = 17888)
+    
     context = {
-        'code': obj.code,
-        'location': obj.location,
-        'days':obj.days
-    }
-    '''
-    context={
         'object':obj
     }
     return render(request, 'course/detail.html', context)
