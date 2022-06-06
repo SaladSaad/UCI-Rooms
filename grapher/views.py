@@ -5,11 +5,11 @@ from django.core import serializers
 from .models import Course
 
 # Create your views here.
-def show_graph_view(request):
+def show_graph_view(request, **kwargs):
     json_serializer = serializers.get_serializer("json")()
     courses_json = json_serializer.serialize(Course.objects.all())
-    
-    context = {'data': courses_json}
+    idk = list(Course.objects.values())
+    context={'qs':courses_json, 'qs2':idk}
     return render(request, 'index.html', context)
 
 # Create your views here.

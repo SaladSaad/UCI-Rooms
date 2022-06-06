@@ -1,8 +1,22 @@
 google.charts.load("current", { packages: ["timeline"] });
 google.charts.setOnLoadCallback(drawChart);
 
-function test(courses) {
-  console.log(courses);
+function getDigit(number, n) {
+  return Math.floor((number / Math.pow(10, n - 1)) % 10);
+}
+
+function getTime(time) {
+  digitCnt = Math.max(Math.floor(Math.log10(Math.abs(time))), 0) + 1;
+
+  minutes = getDigit(time, 2) * 10 + getDigit(time, 1);
+
+  hours = getDigit(time, 3);
+
+  if (digitCnt == 4) {
+    hours += getDigit(time, 4) * 10;
+  }
+
+  return [hours, minutes];
 }
 function drawChart() {
   var container = document.getElementById("example5.3");
@@ -13,11 +27,28 @@ function drawChart() {
   dataTable.addColumn({ type: "string", id: "Name" });
   dataTable.addColumn({ type: "date", id: "Start" });
   dataTable.addColumn({ type: "date", id: "End" });
-  dataTable.addRows([
+
+  var AllCourses = [];
+  var OneCourseData = [];
+  for (let i = 0; i < Object.keys(data).length; i++) {
+    var course = data[i].fields;
+    var starttime = getTime(course.starttime);
+    var endtime = getTime(course.endtime);
+
+    OneCourseData = [
+      course.location,
+      String(course.code),
+      new Date(0, 0, 0, starttime[0], starttime[1], 0),
+      new Date(0, 0, 0, endtime[0], endtime[1], 0),
+    ]; 
+
+    AllCourses.push(OneCourseData);
+  }
+  var blahblah = [
     [
       "PCB 1300",
       "16425",
-      new Date(0, 0, 0, 8, 0, 0),
+      new Date(0, 0, 0, 08, 0, 0),
       new Date(0, 0, 0, 9, 50, 0),
     ],
     [
@@ -26,7 +57,8 @@ function drawChart() {
       new Date(0, 0, 0, 21, 0, 0),
       new Date(0, 0, 0, 21, 50, 0),
     ],
-  ]);
+  ];
+  dataTable.addRows(AllCourses);
 
   var options = {
     timeline: { colorByRowLabel: true },

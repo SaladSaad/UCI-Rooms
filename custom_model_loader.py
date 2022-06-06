@@ -6,8 +6,9 @@ sys.path.append(os.getcwd()+'/grapher')
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'rooms.settings')
 django.setup()
 
+# TODO: First object key =6 because of header. Set to 0
 from grapher.models import Course
-
+ 
 
 def load_courses():
     with open('data/parsed-courses.csv', 'r') as file:
