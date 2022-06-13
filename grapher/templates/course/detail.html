@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block body %}
+<p>Code: {{object.code}}</p>
+<p>Location: {{object.location}}</p>
+
+<p>
+  Days: {% if object.days != None and object.days != '' %}{{object.days}} {% else %}Days lost at sea{% endif %}
+</p>
+<p>Times: {{object.starttime}}-{{object.endtime}}</p>
+
+{% endblock body %}

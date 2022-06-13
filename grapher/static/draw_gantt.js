@@ -35,29 +35,18 @@ function drawChart() {
     var starttime = getTime(course.starttime);
     var endtime = getTime(course.endtime);
 
-    OneCourseData = [
-      course.location,
-      String(course.code),
-      new Date(0, 0, 0, starttime[0], starttime[1], 0),
-      new Date(0, 0, 0, endtime[0], endtime[1], 0),
-    ]; 
+    if (course.days == "W") {
+      OneCourseData = [
+        course.location,
+        String(course.code),
+        new Date(0, 0, 0, starttime[0], starttime[1], 0),
+        new Date(0, 0, 0, endtime[0], endtime[1], 0),
+      ];
 
-    AllCourses.push(OneCourseData);
+      AllCourses.push(OneCourseData);
+    }
   }
-  var blahblah = [
-    [
-      "PCB 1300",
-      "16425",
-      new Date(0, 0, 0, 08, 0, 0),
-      new Date(0, 0, 0, 9, 50, 0),
-    ],
-    [
-      "ELH 110",
-      "16438",
-      new Date(0, 0, 0, 21, 0, 0),
-      new Date(0, 0, 0, 21, 50, 0),
-    ],
-  ];
+
   dataTable.addRows(AllCourses);
 
   var options = {
