@@ -1,4 +1,7 @@
-{% extends 'base.html' %} {% load static %} {% block scripts %}
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block scripts %}
 
 <script
   type="text/javascript"
@@ -6,16 +9,19 @@
 ></script>
 <script src="{%static 'draw_gantt.js' %}"></script>
 <script>
-  var data = JSON.parse("{{qs|safe}}");
+  var data=JSON.parse('{{qs|safe}}');
 </script>
 
-{% endblock scripts%} {% block body %}
-<div class="container" id="wrapper">
-  <h1>UCI Rooms</h1>
-</div>
-<div class="container">
+{% endblock scripts%} 
+
+{% block body %}
+<header class="container-sm">
+  <h1><a href="">UCI Rooms</a></h1>
+  <p>A fully open-source application built by <a href="https://github.com/SaladSaad">Saad Sheikh</a></p>
+</header>
+<div class="container-sm">
   <form action="">
-    <label for="Location">location</label>
+    <label for="Location">Location</label>
     <input id="Location" type="text" placeholder="🔎" />
 
     <label for="Quarters">Quarters: </label>
@@ -31,6 +37,6 @@
     </select>
   </form>
 </div>
-<div id="example5.3" style="height: auto"></div>
+<div class = "container-fluid" id="example5.3" style="height: auto"></div>
 
-{% endblock body%}
+ {% endblock body%}
