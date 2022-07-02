@@ -4,11 +4,11 @@
 	type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"
 ></script>
+<script language ='JavaScript' type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="{%static 'draw_gantt.js' %}"></script>
 <script>
 	var data = JSON.parse('{{qs|safe}}');
 </script>
-
 {% endblock scripts%} {% block body %}
 <header class="header">
 	<h1><a href="">UCI Rooms</a></h1>

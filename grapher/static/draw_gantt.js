@@ -1,5 +1,12 @@
 google.charts.load('current', { packages: ['timeline'] });
 google.charts.setOnLoadCallback(drawChart);
+window.addEventListener('DOMContentLoaded', (event) => {
+  loadChartCSS();
+  });
+  
+$(window).resize(function () {
+	drawChart();
+});
 
 //returns individual digits of large numbers
 function getDigit(number, n) {
@@ -20,6 +27,18 @@ function getTime(time) {
 
 	return [hours, minutes];
 }
+
+var rowFontFamily = '';
+var rowFontSize = 16;
+var barFontFamily = '';
+var barFontSize = 16;
+
+function loadChartCSS() {
+	rowFontFamily = getFontFamily('rows');
+	rowFontFamily = getFontSize('rows');
+	barFontFamily = getFontFamily('bars');
+	barFontSize = getFontSize('bars');
+};
 
 function getFontSize(id) {
 	var el = document.getElementById(id);
@@ -70,18 +89,19 @@ function drawChart() {
 	dataTable.addRows(AllCourses);
 
 	var options = {
-    //colors: ['black', 'indigo'],
+		//colors: ['black', 'indigo'],
 		timeline: {
 			colorByRowLabel: true,
 			rowLabelStyle: {
-				fontName: getFontFamily('rows'),
-				fontSize: getFontSize('rows'),
+				fontName: rowFontFamily,
+				fontSize: rowFontSize,
 			},
 			barLabelStyle: {
-				fontName: getFontFamily('bars'),
-				fontSize: getFontSize('bars'),
+				fontName: barFontFamily,
+				fontSize: barFontSize,
 			},
-		}, backgroundColor: '',
+		},
+		backgroundColor: '',
 	};
 
 	chart.draw(dataTable, options);
