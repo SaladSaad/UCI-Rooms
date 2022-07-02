@@ -1,0 +1,42 @@
+{% extends 'base.html' %} 
+{% load static %} 
+
+{% block scripts %}
+<link rel="stylesheet" type="text/css" href="{%static 'css/base.css' %}"/>
+<script
+  type="text/javascript"
+  src="https://www.gstatic.com/charts/loader.js"
+></script>
+<script src="{%static 'draw_gantt.js' %}"></script>
+<script>
+  var data=JSON.parse('{{qs|safe}}');
+</script>
+
+{% endblock scripts%} 
+
+{% block body %}
+<header class="container-sm">
+  <h1><a href="">UCI Rooms</a></h1>
+  <p>A fully open-source application built by <a href="https://github.com/SaladSaad">Saad Sheikh</a></p>
+</header>
+<div class="container-sm">
+  <form action="">
+    <label for="Location">Location</label>
+    <input id="Location" type="text" placeholder="🔎" />
+
+    <label for="Quarters">Quarters: </label>
+    <select name="Quarters" id="Quarters">
+      <option value="QuartersCurrent">Current</option>
+      <option value="QuartersPast">Past</option>
+    </select>
+    <label for="Sort Order">Sort By: </label>
+    <select name="Sort Order" id="Sort Order">
+      <option value="SortLocation" selected>Location</option>
+      <option value="SortTimeUp">Start Time ⬆️</option>
+      <option value="SortTimeDown">Start Time ⬇️</option>
+    </select>
+  </form>
+</div>
+<div class = "container-fluid" id="example5.3" style="height: auto"></div>
+
+{% endblock body%}

@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+    font-family: serif;
+}
+
+
+.header{
+    text-align: center;
+}
+
+.timeline{
+    height: 700px;
+    padding: 10px;
+    margin: 0 auto;
+
+}
+
+#rows{
+    font-family: 'Arial';
+    font-size: 1em;
+    display: none;
+}
+
+#bars{
+    font-family: 'Helvetica';
+    font-size: 0.75em;
+    display: none;
+}
