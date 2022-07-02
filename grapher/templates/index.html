@@ -4,40 +4,54 @@
 	type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"
 ></script>
-<script language ='JavaScript' type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script
+	language="JavaScript"
+	type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+></script>
 <script src="{%static 'draw_gantt.js' %}"></script>
 <script>
 	var data = JSON.parse('{{qs|safe}}');
 </script>
 {% endblock scripts%} {% block body %}
 <header class="header">
-	<h1><a href="">UCI Rooms</a></h1>
+	<h1><a class="blueText" href="">UCI Rooms</a></h1>
 	<p>
-		A fully open-source application built by
-		<a href="https://github.com/SaladSaad">Saad Sheikh</a>
+		A fully <span class="redText">open-source</span> application built by
+		<a class="blueText" href="https://github.com/SaladSaad">Saad Sheikh</a>
 	</p>
 </header>
-<div class="container-sm">
-	<form action="">
-		<label for="Location">Location</label>
-		<input id="Location" type="text" placeholder="🔎" />
+<div class="chart">
+	<div id="chartSettings">
+		<form action="">
+			<label for="Location"
+				>Location: <input class="chartInput" id="Location" type="text"
+			/></label>
 
-		<label for="Quarters">Quarters: </label>
-		<select name="Quarters" id="Quarters">
-			<option value="QuartersCurrent">Current</option>
-			<option value="QuartersPast">Past</option>
-		</select>
-		<label for="Sort Order">Sort By: </label>
-		<select name="Sort Order" id="Sort Order">
-			<option value="SortLocation" selected>Location</option>
-			<option value="SortTimeUp">Start Time ⬆️</option>
-			<option value="SortTimeDown">Start Time ⬇️</option>
-		</select>
-	</form>
+			<label for="Quarters"
+				>Quarters:
+				<select name="Quarters" id="Quarters" class="chartInput">
+					<option value="" selected>(select one)</option>
+					<option value="QuartersCurrent">Current</option>
+					<option value="QuartersPast">Past</option>
+				</select></label
+			>
+			<label for="Sort Order"
+				>Sort By:
+				<select class="chartInput" name="Sort Order" id="Sort Order">
+					<option value="" selected>(select one)</option>
+					<option value="SortLocation">Location</option>
+					<option value="SortTimeUp">Start Time ⬆️</option>
+					<option value="SortTimeDown">Start Time ⬇️</option>
+				</select></label
+			>
+		</form>
+	</div>
+	<div class="timeline" id="timeline">
+		<div id="rows"></div>
+		<div id="bars"></div>
+	</div>
 </div>
-<div class="timeline" id="timeline">
-	<div id="rows"></div>
-	<div id="bars"></div>
-</div>
-
+<footer>
+</footer>
 {% endblock body%}

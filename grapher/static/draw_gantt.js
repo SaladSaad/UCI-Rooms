@@ -35,7 +35,7 @@ var barFontSize = 16;
 
 function loadChartCSS() {
 	rowFontFamily = getFontFamily('rows');
-	rowFontFamily = getFontSize('rows');
+	rowFontSize = getFontSize('rows');
 	barFontFamily = getFontFamily('bars');
 	barFontSize = getFontSize('bars');
 };
@@ -44,7 +44,6 @@ function getFontSize(id) {
 	var el = document.getElementById(id);
 	var style = window.getComputedStyle(el, null).getPropertyValue('font-size');
 	var fontSize = parseFloat(style);
-	console.log(id, fontSize);
 	return fontSize;
 }
 
@@ -89,7 +88,7 @@ function drawChart() {
 	dataTable.addRows(AllCourses);
 
 	var options = {
-		//colors: ['black', 'indigo'],
+		colors: ['#f35d45','#089aff','#facd58' ],
 		timeline: {
 			colorByRowLabel: true,
 			rowLabelStyle: {
@@ -102,6 +101,7 @@ function drawChart() {
 			},
 		},
 		backgroundColor: '',
+		alternatingRowStyle: false
 	};
 
 	chart.draw(dataTable, options);
