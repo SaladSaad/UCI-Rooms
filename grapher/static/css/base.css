@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
 * {
 	box-sizing: border-box;
 	padding: 0;
@@ -7,7 +8,6 @@
 body {
 	font-family: 'Montserrat', sans-serif;
 	background-color: #fdfbfb;
-	height: 100vh;
 }
 h1 {
 	font-weight: 700;
@@ -27,18 +27,59 @@ form {
 	align-items: center;
 }
 
-form > label {
-	margin-bottom: 5px;
+footer {
+	width: 100%;
+	height: auto;
+    padding-top: 30px;
+	background-color: #ebedee;
+    border-radius: 20px 20px 0 0; 
+}
+#footerContent{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
 }
 
-footer {
-	position: relative;
-	left: 0;
-	bottom: 0;
-	width: 100%;
-    height: 300px;
-	background-color: #ebedee;
+#footerContent p{
+    margin: 10px auto;
+    line-height: 20px;
 }
+#footerContent p:not(:first-of-type){
+    max-width: 500px;
+    font-size: 0.75rem;
+}
+
+#socials{
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem 0 3 rem 0;
+}
+
+#socials li{
+    margin: 0 10px;
+}
+
+#socials a{
+    text-decoration: none;
+    color: black;
+}
+
+#socials a i{
+    font-size: 2rem;
+    transition: color .4s ease;
+}
+
+#socials a:hover i{
+    color: #089aff;
+}
+#footerLogo{
+    font-size: 3rem;
+}
+
 .redText {
 	color: #f35d45;
 }
@@ -47,22 +88,29 @@ footer {
 	color: #089aff;
 }
 
-.chartInput {
-	margin: 10px;
-	padding: 5px;
-	width: 150px;
-}
 .header {
 	text-align: center;
 	padding: 32px;
 }
 
-.timeline {
-	height: 600px;
-	padding: 10px;
-	margin: 0 auto;
+.chartInput {
+	margin: 10px 0px 20px 0px;
+	padding: 5px;
+	width: 150px;
 }
 
+.timeline {
+	min-height: 550px;
+	margin: 0 30px;
+}
+
+.italic{
+    font-style: italic;
+}
+
+.button{
+    
+}
 #rows {
 	font-size: 1em;
 	display: none;

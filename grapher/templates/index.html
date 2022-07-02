@@ -13,15 +13,19 @@
 <script>
 	var data = JSON.parse('{{qs|safe}}');
 </script>
+<script
+	src="https://kit.fontawesome.com/9564b9d43b.js"
+	crossorigin="anonymous"
+></script>
 {% endblock scripts%} {% block body %}
 <header class="header">
 	<h1><a class="blueText" href="">UCI Rooms</a></h1>
 	<p>
-		A fully <span class="redText">open-source</span> application built by
-		<a class="blueText" href="https://github.com/SaladSaad">Saad Sheikh</a>
+		A fully <a class="blueText" href="https://github.com/SaladSaad/UCI-Rooms">open-source</a> application built by
+		<span class="redText">Saad Sheikh</a>
 	</p>
 </header>
-<div class="chart">
+<main class="chart">
 	<div id="chartSettings">
 		<form action="">
 			<label for="Location"
@@ -51,7 +55,26 @@
 		<div id="rows"></div>
 		<div id="bars"></div>
 	</div>
-</div>
+</main>
 <footer>
+	<div id="footerContent">
+		<div id="footerLogo"><i class="fa-solid fa-door-open"></i></div>
+		
+		<p>
+			UCI Rooms intends to help students find open classrooms on campus.
+		</p>
+		
+		<ul id="socials">
+
+			<li>
+				<a href="#"><i class="fa-brands fa-github button"></i></a>
+			</li>
+			<li>
+				<a href="#"><i class="fa-brands fa-linkedin-in button"></i></a>
+			</li>
+		</ul>
+		<p class="italic">This application was not built in collaboration with and is not owned/managed/accounted for by UCI.</p>
+		
+	</div>
 </footer>
 {% endblock body%}
