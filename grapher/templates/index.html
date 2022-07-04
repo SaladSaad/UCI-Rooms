@@ -19,42 +19,46 @@
 ></script>
 {% endblock scripts%} {% block body %}
 <header class="header">
-	<h1><a class="blueText" href="">UCI Rooms</a></h1>
+	<!-- TODO: Change h1 href to actual address --> 
+	<h1><a class="blueText" href="http://127.0.0.1:8000/">UCI Rooms</a></h1>
 	<p>
 		A fully <a class="blueText" href="https://github.com/SaladSaad/UCI-Rooms">open-source</a> application built by
 		<span class="redText">Saad Sheikh</a>
 	</p>
 </header>
-<main class="chart">
+<main>
+	<div class="chart">
 	<section role="Filter or Sort Chart Data" id="chartSettings">
 		<form action="">
-			<label for="Location"
-				>Location: <input class="chartInput" id="Location" type="text"
+			<label for="location"
+				>Location: <input class="chartInput"  id="location" type="text" name="location"
 			/></label>
 
 			<label for="Quarters"
 				>Quarters:
 				<select name="Quarters" id="Quarters" class="chartInput">
 					<option value="" selected>(select one)</option>
-					<option value="QuartersCurrent">Current</option>
-					<option value="QuartersPast">Past</option>
+					<option value="Current">Current</option>
+					<option value="Past">Past</option>
 				</select></label
 			>
 			<label for="Sort Order"
 				>Sort By:
 				<select class="chartInput" name="Sort Order" id="Sort Order">
 					<option value="" selected>(select one)</option>
-					<option value="SortLocation">Location</option>
-					<option value="SortTimeUp">Start Time ⬆️</option>
-					<option value="SortTimeDown">Start Time ⬇️</option>
+					<option value="location">Location</option>
+					<option value="TimeUp">Start Time ⬆️</option>
+					<option value="TimeDown">Start Time ⬇️</option>
 				</select></label
 			>
+			<input class="chartInput button" id = 'chartInputSubmit' type="submit" value="Apply">
 		</form>
 	</section>
 	<section role="classes chart" class="timeline" id="timeline">
 		<div id="rows"></div>
 		<div id="bars"></div>
 	</section>
+</div>
 </main>
 <footer>
 	<div id="footerContent">
