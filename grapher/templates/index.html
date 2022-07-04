@@ -26,7 +26,7 @@
 	</p>
 </header>
 <main class="chart">
-	<div id="chartSettings">
+	<section role="Filter or Sort Chart Data" id="chartSettings">
 		<form action="">
 			<label for="Location"
 				>Location: <input class="chartInput" id="Location" type="text"
@@ -50,15 +50,15 @@
 				</select></label
 			>
 		</form>
-	</div>
-	<div class="timeline" id="timeline">
+	</section>
+	<section role="classes chart" class="timeline" id="timeline">
 		<div id="rows"></div>
 		<div id="bars"></div>
-	</div>
+	</section>
 </main>
 <footer>
 	<div id="footerContent">
-		<div id="footerLogo"><i class="fa-solid fa-door-open"></i></div>
+		<div id="footerLogo" aria-label="Logo: Open Door"><i class="fa-solid fa-door-open"></i></div>
 		
 		<p>
 			UCI Rooms intends to help students find open classrooms on campus.
@@ -73,7 +73,7 @@
 				<a href="#"><i class="fa-brands fa-linkedin-in button"></i></a>
 			</li>
 		</ul>
-		<p class="italic">This application was not built in collaboration with and is not owned/managed/accounted for by UCI.</p>
+		<p class="italic">This application was not built in collaboration with and is not owned/managed by UCI.</p>
 		
 	</div>
 </footer>
