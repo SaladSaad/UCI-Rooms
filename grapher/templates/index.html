@@ -29,24 +29,22 @@
 <main>
 	<div class="chart">
 	<section role="Filter or Sort Chart Data" id="chartSettings">
-		<form action="">
+		<form action="" method="get">
 			<label for="location"
-				>Location: <input class="chartInput"  id="location" type="text" name="location"
+				>Location: <input class="chartInput"  id="location" type="text" name="location" value="{{formLocation}}"
 			/></label>
 
 			<label for="Quarters"
 				>Quarters:
 				<select name="Quarters" id="Quarters" class="chartInput">
-					<option value="" selected>(select one)</option>
-					<option value="Current">Current</option>
+					<option value="Current" selected>Current</option>
 					<option value="Past">Past</option>
 				</select></label
 			>
 			<label for="Sort Order"
 				>Sort By:
 				<select class="chartInput" name="Sort Order" id="Sort Order">
-					<option value="" selected>(select one)</option>
-					<option value="location">Location</option>
+					<option value="location" selected>Location</option>
 					<option value="TimeUp">Start Time ⬆️</option>
 					<option value="TimeDown">Start Time ⬇️</option>
 				</select></label
