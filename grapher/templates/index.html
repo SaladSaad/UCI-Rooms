@@ -27,59 +27,20 @@
 	</p>
 </header>
 <main>
-	<div>
+	<p>{{Error}}</p>
+	<section role="Filter or Sort Chart Data" id="chartSettings">
 		<form action="" method="POST">
 			{% csrf_token %}
-			{{form}}
-			<input type="submit" value="Submit">
-		</form>
-	</div>
-	<div class="chart">
-	<section role="Filter or Sort Chart Data" id="chartSettings">
-		<form action="/chart/" method="get">
-			<label for="location"
-				>Location: <input class="chartInput"  id="location" type="text" name="location" value="{{formLocation}}"
-			/>
-			</label>
-			<label for="Day"
-				>Day:
-				<select name="Quarter" id="Quarter" class="chartInput">
-					<option value="M" selected>Monday</option>
-					<option value="T">Tuesday</option>
-					<option value="W">Wednesday</option>
-					<option value="Th">Thursday</option>
-					<option value="F">Friday</option>
-				</select>
-			</label>
-			<label for="Quarter"
-				>Quarter:
-				<select name="Quarter" id="Quarter" class="chartInput">
-					<option value="Current" selected>Current</option>
-					<option value="Past">Past</option>
-				</select>
-			</label>
-
-
-			
-
-			<label for="Sort Order"
-				>Sort By:
-				<select class="chartInput" name="Sort Order" id="Sort Order">
-					<option value="locationAsc" selected>Location 🔼</option>
-					<option value="locationDsc" >Location 🔽</option>
-					<option value="TimeUp">Start Time 🔼</option>
-					<option value="TimeDown">Start Time 🔽</option>
-				</select>
-			</label>
-
+			{{form.as_p}}
 			<input class="chartInput button" id = 'chartInputSubmit' type="submit" value="Apply">
 		</form>
 	</section>
-	<section role="classes chart" class="timeline" id="timeline">
-		<div id="rows"></div>
-		<div id="bars"></div>
-	</section>
-</div>
+	<div class="chart">
+		<section role="classes chart" class="timeline" id="timeline">
+			<div id="rows"></div>
+			<div id="bars"></div>
+		</section>
+	</div>
 </main>
 <footer>
 	<div id="footerContent">

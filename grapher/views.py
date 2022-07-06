@@ -18,7 +18,7 @@ def show_graph_view(request, **kwargs):
         form = chartForm(request.POST)
         # check whether it's valid:
         if form.is_valid():
-            formLocation = form.cleaned_data['location']
+            formLocation = form.cleaned_data['location'].upper()
             formDay = form.cleaned_data['day']
             formQuarter = form.cleaned_data['quarter']
             formSort = form.cleaned_data['sort']
@@ -26,7 +26,7 @@ def show_graph_view(request, **kwargs):
             json_serializer = serializers.get_serializer("json")()
             if len(formLocation) > 0:
                 courses_json = json_serializer.serialize(
-                    Course.objects.all().filter(location=formLocation, days=formDay).order_by(formSort))
+                    Course.objects.all().filter(location__contains=formLocation, days=formDay).order_by(formSort))
                 context = {'qs': courses_json, 'form': form}
                 return render(request, 'index.html', context)
             else:
@@ -34,12 +34,13 @@ def show_graph_view(request, **kwargs):
                     Course.objects.all().filter(days=formDay).order_by(formSort))
                 context = {'qs': courses_json, 'form': form}
                 return render(request, 'index.html', context)
+        
 
     # if a GET (or any other method) we'll create a blank form
     else:
         form = chartForm()
     ###
-
+    
     ### Filling Chart ###
     json_serializer = serializers.get_serializer("json")()
     courses_json = json_serializer.serialize(
