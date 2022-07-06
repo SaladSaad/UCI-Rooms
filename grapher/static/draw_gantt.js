@@ -90,6 +90,7 @@ function drawChart() {
 	var options = {
 		colors: ['#f35d45','#089aff','#facd58' ],
 		timeline: {
+			showBarLabels: false,
 			colorByRowLabel: true,
 			rowLabelStyle: {
 				fontName: rowFontFamily,

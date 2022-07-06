@@ -27,28 +27,51 @@
 	</p>
 </header>
 <main>
+	<div>
+		<form action="" method="POST">
+			{% csrf_token %}
+			{{form}}
+			<input type="submit" value="Submit">
+		</form>
+	</div>
 	<div class="chart">
 	<section role="Filter or Sort Chart Data" id="chartSettings">
-		<form action="" method="get">
+		<form action="/chart/" method="get">
 			<label for="location"
 				>Location: <input class="chartInput"  id="location" type="text" name="location" value="{{formLocation}}"
-			/></label>
-
-			<label for="Quarters"
-				>Quarters:
-				<select name="Quarters" id="Quarters" class="chartInput">
+			/>
+			</label>
+			<label for="Day"
+				>Day:
+				<select name="Quarter" id="Quarter" class="chartInput">
+					<option value="M" selected>Monday</option>
+					<option value="T">Tuesday</option>
+					<option value="W">Wednesday</option>
+					<option value="Th">Thursday</option>
+					<option value="F">Friday</option>
+				</select>
+			</label>
+			<label for="Quarter"
+				>Quarter:
+				<select name="Quarter" id="Quarter" class="chartInput">
 					<option value="Current" selected>Current</option>
 					<option value="Past">Past</option>
-				</select></label
-			>
+				</select>
+			</label>
+
+
+			
+
 			<label for="Sort Order"
 				>Sort By:
 				<select class="chartInput" name="Sort Order" id="Sort Order">
-					<option value="location" selected>Location</option>
-					<option value="TimeUp">Start Time ⬆️</option>
-					<option value="TimeDown">Start Time ⬇️</option>
-				</select></label
-			>
+					<option value="locationAsc" selected>Location 🔼</option>
+					<option value="locationDsc" >Location 🔽</option>
+					<option value="TimeUp">Start Time 🔼</option>
+					<option value="TimeDown">Start Time 🔽</option>
+				</select>
+			</label>
+
 			<input class="chartInput button" id = 'chartInputSubmit' type="submit" value="Apply">
 		</form>
 	</section>
