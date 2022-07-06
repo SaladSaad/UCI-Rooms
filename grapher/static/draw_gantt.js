@@ -73,16 +73,14 @@ function drawChart() {
 		var starttime = getTime(course.starttime);
 		var endtime = getTime(course.endtime);
 
-		if (course.days == 'W') {
-			OneCourseData = [
-				course.location,
-				String(course.code),
-				new Date(0, 0, 0, starttime[0], starttime[1], 0),
-				new Date(0, 0, 0, endtime[0], endtime[1], 0),
-			];
+		OneCourseData = [
+			course.location,
+			String(course.code),
+			new Date(0, 0, 0, starttime[0], starttime[1], 0),
+			new Date(0, 0, 0, endtime[0], endtime[1], 0),
+		];
 
-			AllCourses.push(OneCourseData);
-		}
+		AllCourses.push(OneCourseData);
 	}
 
 	dataTable.addRows(AllCourses);
@@ -90,7 +88,7 @@ function drawChart() {
 	var options = {
 		colors: ['#f35d45','#089aff','#facd58' ],
 		timeline: {
-			showBarLabels: false,
+			showBarLabels: true,
 			colorByRowLabel: true,
 			rowLabelStyle: {
 				fontName: rowFontFamily,

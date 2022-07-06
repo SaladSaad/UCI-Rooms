@@ -28,12 +28,13 @@ def show_graph_view(request, **kwargs):
                 courses_json = json_serializer.serialize(
                     Course.objects.all().filter(location__contains=formLocation, days=formDay).order_by(formSort))
                 context = {'qs': courses_json, 'form': form}
-                return render(request, 'index.html', context)
             else:
                 courses_json = json_serializer.serialize(
                     Course.objects.all().filter(days=formDay).order_by(formSort))
                 context = {'qs': courses_json, 'form': form}
-                return render(request, 'index.html', context)
+            if len(context.get('qs'))==2 :
+                context = {'form': form, 'error':'No available data for selectors. Please try different options'}
+            return render(request, 'index.html', context)
         
 
     # if a GET (or any other method) we'll create a blank form

@@ -27,7 +27,7 @@
 	</p>
 </header>
 <main>
-	<p>{{Error}}</p>
+	
 	<section role="Filter or Sort Chart Data" id="chartSettings">
 		<form action="" method="POST">
 			{% csrf_token %}
@@ -35,6 +35,7 @@
 			<input class="chartInput button" id = 'chartInputSubmit' type="submit" value="Apply">
 		</form>
 	</section>
+	<p class="centered italic">{{error}}</p>
 	<div class="chart">
 		<section role="classes chart" class="timeline" id="timeline">
 			<div id="rows"></div>

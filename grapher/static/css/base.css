@@ -116,6 +116,9 @@ footer {
 	transform: translate(0px, -3px); /*left and up*/
 }
 
+.centered{
+	text-align: center;
+}
 .redText {
 	color: #f35d45;
 }
