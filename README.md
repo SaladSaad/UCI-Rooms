@@ -1,4 +1,4 @@
-# UCI-Rooms
+# Zot Rooms
 
 Are you tired of people chewing in the library with their mouths open? 
 Do you want to write on a board bigger than a footlong?
