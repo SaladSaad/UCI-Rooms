@@ -1,9 +1,12 @@
 google.charts.load('current', { packages: ['timeline'] });
 google.charts.setOnLoadCallback(drawChart);
 window.addEventListener('DOMContentLoaded', (event) => {
-  loadChartCSS();
-  });
-  
+	loadChartCSS();
+});
+
+const search = document.getElementById('location');
+const matchList = document.getElementById('matchList');
+
 $(window).resize(function () {
 	drawChart();
 });
@@ -38,7 +41,7 @@ function loadChartCSS() {
 	rowFontSize = getFontSize('rows');
 	barFontFamily = getFontFamily('bars');
 	barFontSize = getFontSize('bars');
-};
+}
 
 function getFontSize(id) {
 	var el = document.getElementById(id);
@@ -56,6 +59,7 @@ function getFontFamily(id) {
 	return style;
 }
 
+AllLocations = [];
 function drawChart() {
 	var container = document.getElementById('timeline');
 	var chart = new google.visualization.Timeline(container);
@@ -80,13 +84,14 @@ function drawChart() {
 			new Date(0, 0, 0, endtime[0], endtime[1], 0),
 		];
 
+		AllLocations.push(course.location);
 		AllCourses.push(OneCourseData);
 	}
 
 	dataTable.addRows(AllCourses);
 
 	var options = {
-		colors: ['#f35d45','#089aff','#facd58' ],
+		colors: ['#f35d45', '#089aff', '#facd58'],
 		timeline: {
 			showBarLabels: true,
 			colorByRowLabel: true,
@@ -100,8 +105,40 @@ function drawChart() {
 			},
 		},
 		backgroundColor: '',
-		alternatingRowStyle: false
+		alternatingRowStyle: false,
 	};
 
 	chart.draw(dataTable, options);
+}
+
+//search allcourses list and filter it
+function searchLocations(searchText) {
+	console.log(searchText);
+	let matches = AllLocations.filter((room) => {
+		const regex = new RegExp(`^${searchText}`, 'gi');
+		return room.match(regex);
+	});
+
+	if (searchText.length === 0) {
+		matches = [];
+		matchList.innerHTML = '';
+	}
+	console.log(matches);
+	outputHtml(matches);
+}
+
+//show results in html
+const outputHtml = matches =>{
+	if(matches.length > 0){
+		const html = matches.map(match=>`
+		<div class="card card-body mb-1">
+			<h4>${match} <span class="text-primary"></span></h4>
+		</div>`).join('');
+		matchList.innerHTML = html;
+
+	}
+}
+
+if (search) {
+	search.addEventListener('input', () => searchLocations(search.value));
 }

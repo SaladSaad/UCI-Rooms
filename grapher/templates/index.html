@@ -1,23 +1,30 @@
 {% extends 'base.html' %} {% load static %} {% block scripts %}
 <link rel="stylesheet" type="text/css" href="{%static 'css/base.css' %}" />
+
 <script
 	type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"
-></script>
+>//loads google charts api</script>
+
 <script
 	language="JavaScript"
 	type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-></script>
-<script src="{%static 'draw_gantt.js' %}"></script>
+>//jquery</script>
+
 <script>
 	var data = JSON.parse('{{qs|safe}}');
+	//from views.py render(request, index.html, context). Context includes qs. Setting data to qs allows us to use qs in javascript
 </script>
+
 <script
 	src="https://kit.fontawesome.com/9564b9d43b.js"
-	crossorigin="anonymous"
-></script>
-{% endblock scripts%} {% block body %}
+	crossorigin="anonymous">//icons 
+</script>
+
+
+{% endblock scripts %} 
+{% block body %}
 <header class="header">
 	<!-- TODO: Change h1 href to actual address --> 
 	<h1><a class="blueText" href="http://127.0.0.1:8000/">UCI Rooms</a></h1>
@@ -34,6 +41,7 @@
 			{{form.as_p}}
 			<input class="chartInput button" id = 'chartInputSubmit' type="submit" value="Apply">
 		</form>
+		<div id="matchList"></div>
 	</section>
 	<p class="centered italic">{{error}}</p>
 	<div class="chart">
@@ -64,4 +72,9 @@
 		
 	</div>
 </footer>
+
 {% endblock body%}
+{% block scriptsBody %}
+<script src="{%static 'main.js' %}">//creats timeline chart</script>
+
+{% endblock scriptsBody%}
