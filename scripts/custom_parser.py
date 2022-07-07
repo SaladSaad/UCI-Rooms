@@ -63,9 +63,9 @@ def days_times(ogString):
     return(days, start, end)
 
 
-def main_Parser():
+def main():
     print(os.getcwd())
-    path = 'data/eecs.html'
+    path = 'data/all_depts.html'   ############## CHANGE THIS PATH 
     soup = bs4(open(path), 'html.parser')
 
     data = []
@@ -110,6 +110,6 @@ def main_Parser():
     df.to_csv("data/parsed-courses.csv", index=False)
 
 
-if __name__ == "__main_Parser__":
+if __name__ == "__main__":
     #days_times('TuTh    9:30-10:50')
-    main_Parser()
+    main()

@@ -17,9 +17,6 @@ def load_courses():
 
         for course in csvFile:
             Course.objects.create(code=int(course[0]), days=course[1], starttime=int(course[2]), endtime=int(course[3]), location=course[4])
-
-    
-    print(Course.objects.all()) 
     
 
 load_courses()

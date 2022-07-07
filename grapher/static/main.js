@@ -134,7 +134,7 @@ const outputHtml = matches =>{
 		<div class="card card-body mb-1">
 			<h4>${match} <span class="text-primary"></span></h4>
 		</div>`).join('');
-		matchList.innerHTML = html;
+		//matchList.innerHTML = html;
 
 	}
 }
