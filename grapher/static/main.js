@@ -87,8 +87,13 @@ function drawChart() {
 		AllLocations.push(course.location);
 		AllCourses.push(OneCourseData);
 	}
-
+	
 	dataTable.addRows(AllCourses);
+	dataTable.addRows([
+		['~DEV~', String(00000), new Date(0, 0, 0, 7, 0, 0), new Date(0, 0, 0, 23, 0, 0)]
+	]);
+	//hardcoded start and end courses to keep charts even
+	chart.draw(dataTable);
 
 	var options = {
 		colors: ['#f35d45', '#089aff', '#facd58'],
@@ -128,16 +133,19 @@ function searchLocations(searchText) {
 }
 
 //show results in html
-const outputHtml = matches =>{
-	if(matches.length > 0){
-		const html = matches.map(match=>`
+const outputHtml = (matches) => {
+	if (matches.length > 0) {
+		const html = matches
+			.map(
+				(match) => `
 		<div class="card card-body mb-1">
 			<h4>${match} <span class="text-primary"></span></h4>
-		</div>`).join('');
+		</div>`
+			)
+			.join('');
 		//matchList.innerHTML = html;
-
 	}
-}
+};
 
 if (search) {
 	search.addEventListener('input', () => searchLocations(search.value));
